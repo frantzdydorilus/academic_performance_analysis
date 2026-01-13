@@ -1,0 +1,6 @@
+Matiere,P_Valeur_ANOVA,Significatif,Moyenne_18-20 ans,Moyenne_21-23 ans,Moyenne_24-26 ans
+Mathématiques,0.486,FALSE,12.63,12.18,11.88
+Informatique,0.5533,FALSE,12.94,12.73,11.92
+Physique,0.1375,FALSE,12,12.4,10.28
+Économie,0.5904,FALSE,10.87,10.46,10.16
+Anglais,0.2574,FALSE,11.47,11.39,12.82

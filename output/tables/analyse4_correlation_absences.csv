@@ -1,0 +1,3 @@
+Relation,Coefficient_Correlation,Force,Interpretation
+Absences S1 vs Perf S1,-0.347,Modérée,Il existe une correlation Modérée négative entre absences et performance (Absences S1 vs Perf S1)
+Absences S2 vs Perf S2,-0.203,Faible,Il existe une correlation Faible négative entre absences et performance (Absences S2 vs Perf S2)

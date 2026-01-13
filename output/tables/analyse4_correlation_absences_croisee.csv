@@ -1,0 +1,5 @@
+Relation,Coefficient_Correlation,Interpretation,Force
+Absences S1 vs Perf S1,-0.347,Négative,Modérée
+Absences S2 vs Perf S2,-0.203,Négative,Faible
+Absences S1 vs Perf S2,-0.122,Négative,Faible
+Absences S2 vs Perf S1,0.043,Positive,Négligeable

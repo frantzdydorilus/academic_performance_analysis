@@ -1,0 +1,3 @@
+Semestre,Test,P_Valeur_ANOVA,Decision,Seuil_Optimal
+S1,ANOVA (Moyenne vs Classe d'Heures),0,Rejet H0 → Différence significative entre classes,35-40h (Moyenne=13.83)
+S2,ANOVA (Moyenne vs Classe d'Heures),0,Rejet H0 → Différence significative entre classes,41-46h (Moyenne=14)

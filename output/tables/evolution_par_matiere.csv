@@ -1,0 +1,6 @@
+Matiere,Moyenne_S1,Moyenne_S2,Difference,P_Valeur_TestT,Statut
+Mathématiques,12.5,12.39,-0.11,0.5663,Stabilité (Non Significatif)
+Informatique,12.71,12.79,0.08,0.6477,Stabilité (Non Significatif)
+Physique,11.89,12.06,0.17,0.3298,Stabilité (Non Significatif)
+Économie,10.67,10.65,-0.02,0.9281,Stabilité (Non Significatif)
+Anglais,11.68,11.53,-0.15,0.4437,Stabilité (Non Significatif)

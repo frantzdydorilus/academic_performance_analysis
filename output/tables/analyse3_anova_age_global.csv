@@ -1,0 +1,3 @@
+Semestre,Test,P_Valeur_ANOVA,Significatif
+S1,ANOVA (Moyenne générale vs Catégorie d'Âge),0.9311,FALSE
+S2,ANOVA (Moyenne générale vs Catégorie d'Âge),0.4357,FALSE

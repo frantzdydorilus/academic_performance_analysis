@@ -1,0 +1,3 @@
+Semestre,Test,P_Valeur_ANOVA,Decision
+S1,ANOVA (Moyenne vs Classe d'Absences S2),0.8478,Non Rejet H0 → Pas de Difference significative 
+S2,ANOVA (Moyenne vs Classe d'Absences S2),0.0059,Rejet H0 → Différence significative

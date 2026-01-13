@@ -1,0 +1,11 @@
+id_etudiant,nom,filiere,Difference_S2_S1,moyenne_s1,moyenne_s2
+ETU0042,Simon Fournier,Economie,3.92,6.640000000000001,10.56
+ETU0012,Chloe Blanc,Physique,3.7,10.12,13.82
+ETU0027,Pierre Dupont,Physique,3.42,9.68,13.1
+ETU0152,Alice Dupont,Informatique,3.34,12.12,15.46
+ETU0200,Lucie Michel,Physique,3,8.34,11.34
+ETU0052,Maxime Andre,Physique,2.92,9.12,12.04
+ETU0056,Lucie Fournier,Informatique,2.78,10.721020408163264,13.500000000000004
+ETU0048,Louise Martin,Mathématiques,2.76,10.7,13.46
+ETU0198,Lucas Andre,Informatique,2.48,6.980000000000001,9.46
+ETU0134,Pierre Robert,Mathématiques,2.48,10.7,13.179999999999998

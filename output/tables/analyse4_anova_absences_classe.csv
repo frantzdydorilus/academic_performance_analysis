@@ -1,0 +1,3 @@
+Semestre,Test,P_Valeur_ANOVA,Significatif,Interpretation
+S1,ANOVA (Moyenne vs Classe d'Absences),0.8478,FALSE,Pas de différence significative
+S2,ANOVA (Moyenne vs Classe d'Absences),0.0059,TRUE,Différence significative entre classes

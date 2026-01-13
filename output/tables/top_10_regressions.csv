@@ -1,0 +1,11 @@
+id_etudiant,nom,filiere,Difference_S2_S1,moyenne_s1,moyenne_s2
+ETU0184,Alexandre Petit,Mathématiques,-3.4,12.48,9.080000000000002
+ETU0102,Alice Guerin,Informatique,-2.66,12.12,9.46
+ETU0142,Arthur David,Economie,-2.62,11.66,9.04
+ETU0076,Sarah Garnier,Physique,-2.56,11.25826530612245,8.7
+ETU0113,Marie Simon,Informatique,-2.39,16.220000000000002,13.831836734693876
+ETU0018,Marie Simon,Mathématiques,-2.18,14.1,11.92
+ETU0114,Thomas Thomas,Informatique,-2.02,14.720000000000002,12.7
+ETU0187,Sarah Garcia,Economie,-2.02,10.64,8.620000000000001
+ETU0165,Sarah Francois,Informatique,-1.98,14.339999999999998,12.36
+ETU0030,Pierre Fournier,Physique,-1.96,10.54,8.58
