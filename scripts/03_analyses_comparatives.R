@@ -2,7 +2,7 @@
 #                                 ANALYSE 2. EVOLUTION S1 → S2
 #=====================================================================================================
 
-#================================ EVOLUTION GLOBALE =========================================
+#================================ EVOLUTION GLOBALE ==================================================
 
 # Création de la variable de variation (Delta)
 data_analyse_evolution <- data_projet %>%
@@ -10,7 +10,7 @@ data_analyse_evolution <- data_projet %>%
     Difference_S2_S1 = moyenne_s2 - moyenne_s1
   )
 
-# --- 1. Comparaison des moyennes S1 vs S2 (a) : Test T Apparié ---
+#==================== 1. Comparaison des moyennes S1 vs S2 (a) : Test T Apparié =====================
 
 cat("### 2.1. Comparaison Statistique S1 vs S2 (Test T Apparié)\n")
 
@@ -35,13 +35,14 @@ print(test_t_df)
 write_csv(test_t_df, "output/tables/test_t_s1_vs_s2.csv")
 
 # Interprétation automatique
+
 if (test_t_resultat$p.value < 0.05) {
   cat("→ Interprétation : L'évolution globale des moyennes S1 → S2 est significative.\n")
 } else {
   cat("→ Interprétation : Pas d'évolution significative des moyennes S1 → S2.\n")
 }
 
-# --- 2. Statistiques descriptives de la variation (b) ---
+#================ 2. Statistiques descriptives de la variation (b) =================================
 
 cat("\n### 2.2. Statistiques Descriptives de la Variation (Delta S2 - S1)\n")
 
@@ -59,7 +60,7 @@ variation_stats <- data_analyse_evolution %>%
 print(variation_stats)
 write_csv(variation_stats, "output/tables/variation_stats_descriptives.csv")
 
-# --- 3. Identification des progressions et régressions (c, d, e) ---
+#================ 3. Identification des progressions et régressions (c, d, e) =====================
 
 cat("\n### 2.3. Identification des Top Progressions et Régressions\n")
 
@@ -87,7 +88,8 @@ write_csv(top_regression, "output/tables/top_10_regressions.csv")
 
 cat("\nSous-section 2.1 Évolution Globale terminée.\n")
 
-#========================================================================================
+#================================================================================================
+
 #============ 2.2. ÉVOLUTION PAR MATIÈRE (S1 vs S2) =============================
 
 notes_s1_cols <- c("note_math_s1", "note_info_s1", "note_physique_s1", 
@@ -140,7 +142,7 @@ cat("\n### 2.3. Résultats de l'Évolution par Matière\n")
 print(resultats_evolution_matiere)
 write_csv(resultats_evolution_matiere, "output/tables/evolution_par_matiere.csv")
 
-# --- Synthèse : Matières en progression / régression ---
+#===================== Synthèse : Matières en progression / régression =========================
 
 cat("\n### 2.4. Synthèse : Matières en Progression / Régression\n")
 

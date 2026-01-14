@@ -1,16 +1,16 @@
 # ===========================================================================
-# ANALYSE 4 : FACTEURS DE RÉUSSITE (15 points)
+#                    ANALYSE 4 : FACTEURS DE RÉUSSITE
 # ===========================================================================
 
 cat("\n\n--- ANALYSE 4 : FACTEURS DE RÉUSSITE ---\n")
 
-# ========================================================
-# 4.1. Impact des Heures d’Étude
-# ========================================================
+# ===========================================================================================
+#                      4.1. Impact des Heures d’Étude
+# ===========================================================================================
 
 cat("\n### 4.1 Impact des Heures d'Étude\n")
 
-# --- Création des classes d'heures d'étude (Sturges) ---
+#==================== Création des classes d'heures d'étude (Sturges) =======================
 
 N <- nrow(data_projet)
 k_sturges <- 1 + 3.322 * log10(N)
@@ -31,9 +31,9 @@ data_projet <- data_projet %>%
     )
   )
 
-# ---------------------------------------------------------
-# CORRELATION HEURES D'ETUDE / PERFORMANCE (S1 et S2)
-# ---------------------------------------------------------
+#=============================================================================================================
+#                          CORRELATION HEURES D'ETUDE / PERFORMANCE (S1 et S2)
+#=============================================================================================================
 
 cat("\n### 4.1.1 Corrélation entre Heures d'Étude et Performance\n")
 
@@ -64,9 +64,9 @@ print(resultats_correlation_heures)
 write_csv(resultats_correlation_heures, "output/tables/analyse4_correlation_heures_etude.csv")
 
 
-# ---------------------------------------------------------
-# ANOVA par Classe d'Heures d'Étude
-# ---------------------------------------------------------
+#============================================================================================================
+#                                   ANOVA par Classe d'Heures d'Étude
+#============================================================================================================
 
 cat("\n### 4.1.2 ANOVA Moyenne par Classe d'Heures d'Étude\n")
 
@@ -89,14 +89,14 @@ for (semestre in c("S1","S2")) {
   print(stats_heures)
   write_csv(stats_heures, paste0("output/tables/analyse4_stats_heures_", tolower(semestre), ".csv"))
   
-  # ---------------------------------------------------------
-  # TEST ANOVA
-  # H0 : Les moyennes sont égales entre les classes d'heures
-  # H1 : Au moins une classe diffère
-  # Statistique : F = variance inter-groupes / variance intra-groupes
-  # Décision : p-value < 0.05 → Rejet de H0
-  # Interprétation : Si rejet H0 → la classe avec la moyenne la plus élevée correspond au seuil optimal
-  # ---------------------------------------------------------
+#============================================================================================================
+#             TEST ANOVA
+#             H0 : Les moyennes sont égales entre les classes d'heures
+#             H1 : Au moins une classe diffère
+#             Statistique : F = variance inter-groupes / variance intra-groupes
+#             Décision : p-value < 0.05 → Rejet de H0
+#             Interprétation : Si rejet H0 → la classe avec la moyenne la plus élevée correspond au seuil optimal
+#=============================================================================================================
   
   formule_anova <- as.formula(paste(col_moyenne, "~ classe_heures_etude"))
   modele_anova_heures <- aov(formule_anova, data = data_projet)
@@ -125,9 +125,9 @@ print(resultats_anova_heures)
 write_csv(resultats_anova_heures, "output/tables/analyse4_anova_heures_etude.csv")
 
 
-# ========================================================
-# 4.2 Impact des Absences
-# ========================================================
+# ======================================================================================================
+#                             4.2 Impact des Absences
+# ======================================================================================================
 
 cat("\n\n### 4.2 Impact des Absences\n")
 
@@ -162,7 +162,7 @@ print(resultats_correlation_absences)
 write_csv(resultats_correlation_absences, "output/tables/analyse4_correlation_absences.csv")
 
 
-# --- ANOVA par Classe d'Absences (S2) ---
+#===================== ANOVA par Classe d'Absences (S2) =============================================
 
 data_projet <- data_projet %>%
   mutate(
@@ -201,21 +201,21 @@ print(resultats_anova_absences)
 write_csv(resultats_anova_absences,"output/tables/analyse4_anova_absences.csv")
 
 
-# --- Évolution des absences S1 → S2 (T-test apparié) ---
+#=================  Évolution des absences S1 → S2 (T-test apparié) =====================================
 
 test_t_absences <- t.test(data_projet$nb_absences_s2, data_projet$nb_absences_s1, paired=TRUE)
 diff_absences <- mean(data_projet$nb_absences_s2) - mean(data_projet$nb_absences_s1)
 
-# ---------------------------------------------------------
-# TEST T APPARIÉ (Student)
-# H0 : La moyenne des absences S1 et S2 est identique
-# H1 : La moyenne des absences diffère entre S1 et S2
-# Statistique : t = (moyenne_différence) / (écart-type_différence / √n)
-# Décision : p-value < 0.05 → Rejet H0
-# Interprétation : 
-#   - Si diff > 0 → Augmentation significative des absences (régression)
-#   - Si diff < 0 → Diminution significative des absences (progression)
-# ---------------------------------------------------------
+#========================================================================================================
+#          TEST T APPARIÉ (Student)
+#          H0 : La moyenne des absences S1 et S2 est identique
+#          H1 : La moyenne des absences diffère entre S1 et S2
+#          Statistique : t = (moyenne_différence) / (écart-type_différence / √n)
+#          Décision : p-value < 0.05 → Rejet H0
+#          Interprétation : 
+#          - Si diff > 0 → Augmentation significative des absences (régression)
+#          - Si diff < 0 → Diminution significative des absences (progression)
+#========================================================================================================
 
 df_evolution_absences <- tibble(
   Difference_Moyenne = round(diff_absences,2),

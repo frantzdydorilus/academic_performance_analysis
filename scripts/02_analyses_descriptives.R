@@ -5,7 +5,7 @@
 
 #====================== 3.1.1. Démographie (Âge, Genre, Filière, Ville) =============================
 
-# 1. Analyse de l'Âge (a)
+#====================== 1. Analyse de l'Âge (a) =====================================================
 
 cat("### 1.1. Distribution de l'Âge (Moyenne, Médiane, Écart-type)\n")
 
@@ -23,7 +23,7 @@ print(round(age_stats, 2))
 write_csv(age_stats, "output/tables/age_descriptif.csv")
 
 
-# 2. Répartition par Genre (b)
+#====================== 2. Répartition par Genre (b) ===============================================
 
 cat("\n### 1.2. Répartition par Genre\n")
 
@@ -41,7 +41,7 @@ print(genre_stats) # Correction :
 write_csv(genre_stats, "output/tables/genre_repartition.csv")
 
 
-# 3. Répartition par Filière (c)
+#===================== 3. Répartition par Filière (c) =============================================
 
 cat("\n### 1.3. Répartition par Filière\n")
 
@@ -59,7 +59,7 @@ print(filiere_stats)
 write_csv(filiere_stats, "output/tables/filiere_repartition.csv")
 
 
-# 4. Distribution Géographique (Villes principales) (d)
+#==================== 4. Distribution Géographique (Villes principales) (d) ========================
 
 cat("\n### 1.4. Distribution Géographique (Villes principales)\n")
 
@@ -70,7 +70,7 @@ ville_stats <- data_projet %>%
   ) %>%
   ungroup() %>%
   mutate(
-    Pourcentage = round(Effectif / sum(Effectif) * 100, 2) # Correction : Arrondi appliqué seulement ici
+    Pourcentage = round(Effectif / sum(Effectif) * 100, 2) 
   ) %>%
   arrange(desc(Effectif)) %>% 
   slice(1:5) 
@@ -82,13 +82,14 @@ write_csv(ville_stats, "output/tables/ville_repartition_top5.csv")
 cat("\n Sous-section 3.1.1 Démographie terminée. 
 
     Résultats exportés vers output/tables/.\n")
+
 #========================================================================================================
 
 
 #====================== 3.1.2. Comportement Académique (Heures d'étude et Absences) =====================
 
 
-# 1. Statistiques sur les Heures d'Étude par Semaine (a)
+#====================== 1. Statistiques sur les Heures d'Étude par Semaine (a) ==========================
 
 cat("### 2.1. Statistiques Descriptives des Heures d'Étude\n")
 
@@ -106,18 +107,20 @@ print(round(heures_etude_stats, 2))
 write_csv(heures_etude_stats, "output/tables/heures_etude_descriptif.csv")
 
 
-# 2. Statistiques sur le Nombre d'Absences (S1 et S2) (b)
+#====================== 2. Statistiques sur le Nombre d'Absences (S1 et S2) (b) ========================
 
 cat("\n### 2.2. Statistiques Descriptives des Absences (S1 et S2)\n")
 
 absences_stats <- data_projet %>%
   summarise(
     # Semestre 1
+    
     Moyenne_Abs_S1 = mean(nb_absences_s1),
     Mediane_Abs_S1 = median(nb_absences_s1),
     Ecart_Type_Abs_S1 = sd(nb_absences_s1),
     Min_Abs_S1 = min(nb_absences_s1),
     Max_Abs_S1 = max(nb_absences_s1),
+    
     # Semestre 2
     Moyenne_Abs_S2 = mean(nb_absences_s2),
     Mediane_Abs_S2 = median(nb_absences_s2),
@@ -125,10 +128,13 @@ absences_stats <- data_projet %>%
     Min_Abs_S2 = min(nb_absences_s2),
     Max_Abs_S2 = max(nb_absences_s2)
   ) %>%
+  
   # Transformation en format long pour une meilleure présentation
+  
   pivot_longer(everything(), names_to = "Statistique", values_to = "Valeur")
 
 # Correction: Arrondir la colonne 'Valeur' avant l'affichage et l'exportation
+
 absences_stats <- absences_stats %>%
   mutate(Valeur = round(Valeur, 2))
 
@@ -136,17 +142,19 @@ print(absences_stats) # On imprime sans essayer d'arrondir la colonne 'Statistiq
 write_csv(absences_stats, "output/tables/absences_descriptif.csv")
 
 
-# 3. Relation Heures d'Étude / Absences (Corrélation de Pearson) (c)
+#====================== 3. Relation Heures d'Étude / Absences (Corrélation de Pearson) (c) ==============
 
 cat("\n### 2.3. Relation Heures d'Étude / Absences (Corrélation de Pearson)\n")
 
 # Corrélation entre heures d'étude et absences S1
+
 cor_h_abs_s1 <- cor(data_projet$heures_etude_semaine, data_projet$nb_absences_s1)
 
 # Corrélation entre heures d'étude et absences S2
+
 cor_h_abs_s2 <- cor(data_projet$heures_etude_semaine, data_projet$nb_absences_s2)
 
-# --- Fonction d'interprétation de la corrélation ---
+#=============== Fonction d'interprétation de la corrélation ===========================
 interpreter_correlation <- function(r) {
   abs_r <- abs(r)
   direction <- if (r > 0) "positive" else if (r < 0) "négative" else "nulle"
@@ -169,7 +177,9 @@ correlations <- tibble(
   Relation = c("Heures d'étude vs. Absences S1", "Heures d'étude vs. Absences S2"),
   Coefficient_Pearson = round(c(cor_h_abs_s1, cor_h_abs_s2), 3)
 ) %>%
+  
   # Ajout de la colonne Nature_Relation
+  
   rowwise() %>%
   mutate(
     Nature_Relation = interpreter_correlation(Coefficient_Pearson)
@@ -188,21 +198,22 @@ cat("\n Sous-section 3.1.2 Comportement Académique terminée.
 #=============== 3.1.3. Performance Académique (Moyennes, Taux de Succès, Matières Difficiles) ===========
 
 # Définition des colonnes de notes
+
 notes_cols <- c("note_math_s1", "note_math_s2", "note_info_s1", "note_info_s2", 
                 "note_physique_s1", "note_physique_s2", "note_economie_s1", 
                 "note_economie_s2", "note_anglais_s1", "note_anglais_s2")
 moyennes_cols <- c("moyenne_s1", "moyenne_s2")
 
-# --- 1. Statistiques Complètes pour Chaque Matière (a) ---
+#================== 1. Statistiques Complètes pour Chaque Matière (a) ====================================
 cat("### 3.1. Statistiques Complètes par Matière (S1 et S2)\n")
 
-# Calcul des statistiques (Correction: Ecart_Type devient EcartType)
+# Calcul des statistiques 
 stats_par_matiere <- data_projet %>%
   select(all_of(notes_cols)) %>%
   summarise(across(everything(), list(
     Moyenne = ~ mean(.),
     Mediane = ~ median(.),
-    EcartType = ~ sd(.), # <-- CORRECTION
+    EcartType = ~ sd(.), 
     Min = ~ min(.),
     Max = ~ max(.)
   ))) %>%
@@ -220,7 +231,7 @@ print(stats_par_matiere)
 write_csv(stats_par_matiere, "output/tables/stats_completes_par_matiere.csv")
 
 
-# --- 2. Distribution des Moyennes Générales (S1 et S2) (b) ---
+#======================= 2. Distribution des Moyennes Générales (S1 et S2) (b)=================
 
 cat("\n### 3.2. Distribution des Moyennes Générales (S1 et S2)\n")
 moyenne_generale_stats <- data_projet %>%
@@ -228,7 +239,7 @@ moyenne_generale_stats <- data_projet %>%
   summarise(across(everything(), list(
     Moyenne = ~ mean(.),
     Mediane = ~ median(.),
-    EcartType = ~ sd(.), # <-- CORRECTION
+    EcartType = ~ sd(.), 
     Min = ~ min(.),
     Max = ~ max(.)
   ))) %>%
@@ -246,7 +257,8 @@ print(moyenne_generale_stats)
 write_csv(moyenne_generale_stats, "output/tables/distribution_moyennes_generales.csv")
 
 
-# --- 3. Taux de Réussite Global (Moyenne >= 10/20) (c) ---
+#===================== 3. Taux de Réussite Global (Moyenne >= 10/20) (c) ====================
+
 cat("\n### 3.3. Taux de Réussite Global\n")
 
 taux_reussite_global <- data_projet %>%
@@ -261,7 +273,7 @@ print(taux_reussite_global)
 write_csv(taux_reussite_global, "output/tables/taux_reussite_global.csv")
 
 
-# --- 4. Identification des Matières les Plus Difficiles 
+#================== 4. Identification des Matières les Plus Difficiles ===========================
 
 cat("\n### 3.4. Identification des Matières les Plus Difficiles (Note Moyenne < 10)\n")
 

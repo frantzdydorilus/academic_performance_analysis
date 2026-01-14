@@ -11,7 +11,8 @@ get_mode <- function(v) {
   uniqv[which.max(tabulate(match(v, uniqv)))] 
 }
 
-# --- 3.1 Par Filière (a, b, c, d) : Analyses S1 et S2 ---
+#====================== 3.1 Par Filière (a, b, c, d) : Analyses S1 et S2 ===========================
+
 cat("\n### 3.3.1 Performance par Filière (S1 et S2)\n")
 
 # Définition des variables de semestre à analyser
@@ -23,7 +24,8 @@ for (semestre in semestres) {
   
   cat(paste0("\n--- Analyse pour le Semestre ", semestre, " ---\n"))
   
-  # --- 1. Statistiques Descriptives (a, c) ---
+#======================== 1. Statistiques Descriptives (a, c) ======================================
+  
   stats_filiere <- data_projet %>%
     group_by(filiere) %>%
     summarise(
@@ -47,7 +49,7 @@ for (semestre in semestres) {
             filiere_plus_performante$filiere, 
             "avec une moyenne de", filiere_plus_performante$Moyenne, "/20.\n"))
   
-  # --- 2. Comparaison des Moyennes entre Filières (ANOVA) (b) ---
+#===================  2. Comparaison des Moyennes entre Filières (ANOVA) (b) =========================
   
   # ---------------------------------------------------------
   # TEST ANOVA : Comparaison des moyennes par filière
@@ -85,7 +87,7 @@ for (semestre in semestres) {
   
   write_csv(anova_df, paste0("output/tables/analyse3_anova_filiere_", tolower(semestre), ".csv"))
   
-  # --- 3. Taux de Réussite par Filière (d) ---
+#============================ 3. Taux de Réussite par Filière (d) =================================
   taux_reussite_filiere <- data_projet %>%
     group_by(filiere) %>%
     summarise(
@@ -101,9 +103,9 @@ for (semestre in semestres) {
   write_csv(taux_reussite_filiere, paste0("output/tables/analyse3_taux_reussite_filiere_", tolower(semestre), ".csv"))
 }
 
-# ===============================================================================================================
-# ANALYSE 3 : PERFORMANCE PAR GENRE
-# ===============================================================================================================
+# =======================================================================================================
+#                                   ANALYSE 3 : PERFORMANCE PAR GENRE
+# =======================================================================================================
 
 get_mean_by_genre_final <- function(data, col, g) {
   data %>% 
@@ -117,7 +119,8 @@ GENRE_2 <- "Homme"
 
 cat("\n\n### 3.3.2 Analyse de la Performance par Genre (", GENRE_1, "/", GENRE_2, ")\n")
 
-# --- a) Comparaison des performances H/F (S1 et S2) ---
+#========== a) Comparaison des performances H/F (S1 et S2) ===================================
+
 cat("\n--- 3.2.1 Comparaison des Moyennes Générales par Genre (Test T indépendant) ---\n")
 
 resultats_genre_global <- tibble()
@@ -159,7 +162,7 @@ for (semestre in semestres_global) {
 print(resultats_genre_global)
 write_csv(resultats_genre_global, "output/tables/analyse3_performance_genre_global.csv")
 
-# --- b) Différences par matière (Test T indépendant pour chaque matière) ---
+#================== b) Différences par matière (Test T indépendant pour chaque matière) =================
 cat("\n--- 3.2.2 Différences de Performance par Matière (S2) entre Genres ---\n")
 
 notes_s2_cols <- c("note_math_s2", "note_info_s2", "note_physique_s2", "note_economie_s2", "note_anglais_s2")
@@ -196,7 +199,8 @@ for (i in 1:length(matieres)) {
 print(resultats_genre_matiere)
 write_csv(resultats_genre_matiere, "output/tables/analyse3_performance_genre_matiere.csv")
 
-# --- c) Évolution S1 → S2 par genre (Test T apparié) ---
+#===================== c) Évolution S1 → S2 par genre (Test T apparié) ===============================
+
 cat("\n--- 3.2.3 Évolution S1 → S2 par Genre (Test T apparié) ---\n")
 
 resultats_evolution_genre <- tibble()
@@ -235,9 +239,9 @@ for (g in groupes_genre_evolution) {
 print(resultats_evolution_genre)
 write_csv(resultats_evolution_genre, "output/tables/analyse3_evolution_par_genre.csv")
 
-# ===========================================================================
-# PERFORMANCE PAR CATÉGORIE D'ÂGE
-# ===========================================================================
+# =================================================================================================
+#                          PERFORMANCE PAR CATÉGORIE D'ÂGE
+# =================================================================================================
 
 cat("\n\n### 3.3.3 Analyse de la Performance par Catégorie d'Âge\n")
 
@@ -253,7 +257,7 @@ data_projet <- data_projet %>%
 
 cat("Catégories d'âge créées (18-20, 21-23, 24-26).\n")
 
-# --- Statistiques Descriptives et ANOVA sur les Moyennes Générales ---
+#========================= Statistiques Descriptives et ANOVA sur les Moyennes Générales =========================
 cat("\n--- Statistiques Descriptives et ANOVA par Groupe d'Âge (S1 et S2) ---\n")
 
 resultats_anova_global <- tibble()
@@ -309,7 +313,7 @@ cat("\n--- Résumé ANOVA Moyennes Globales par Catégorie d'Âge ---\n")
 print(resultats_anova_global)
 write_csv(resultats_anova_global, "output/tables/analyse3_anova_age_global.csv")
 
-# --- Comparaison des performances par Matière (S2) ---
+#========================= Comparaison des performances par Matière (S2) ===================================
 cat("\n--- ANOVA et Moyennes par Matière (S2) entre Catégories d'Âge ---\n")
 
 notes_s2_cols <- c("note_math_s2", "note_info_s2", "note_physique_s2", "note_economie_s2", "note_anglais_s2")
@@ -352,7 +356,7 @@ for (i in 1:length(matieres)) {
   }
 }
 
-# Affichage et export final des résultats par matière
+#================== Affichage et export final des résultats par matière ====================================
 print(resultats_age_matiere)
 write_csv(resultats_age_matiere, "output/tables/analyse3_performance_age_matiere.csv")
 
